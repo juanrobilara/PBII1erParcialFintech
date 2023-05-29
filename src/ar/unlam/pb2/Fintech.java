@@ -72,6 +72,19 @@ public class Fintech {
 		
 		} return false;
 	}
+
+	public Boolean depositar(Cuenta actual, Double monto) {
+		if(existeCuenta(actual.getIdCuenta())) {
+			for(Cuenta c : cuentas) {
+				if(c.getIdCuenta() == actual.getIdCuenta()) {
+					c.depositarPesos(monto);
+					return true;
+				}
+			}
+		}
+		return false;
+		
+	}
 	
 	
 }

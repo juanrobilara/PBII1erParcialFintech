@@ -116,6 +116,34 @@ public class Cuenta {
 		Cuenta other = (Cuenta) obj;
 		return Objects.equals(idCuenta, other.idCuenta);
 	}
+
+
+
+
+	public Boolean depositarPesos(Double monto) {
+        Moneda peso = saldos.get("Peso");
+        
+        if (peso != null) {
+            peso.agregarSaldo(monto);
+            transacciones.add(new Transaccion(TipoTransaccion.DEPOSITO, monto, peso.toString()));
+            return true;
+        } 
+        return false;
+		
+	}
+
+
+
+
+	public Double obtenerSaldo(String tipoMoneda) {
+        Moneda moneda = saldos.get(tipoMoneda);
+        if (moneda != null) {
+            return moneda.getSaldo();
+        } else {
+            
+            return -1.0;
+        }
+	}
 	
 	
 	
