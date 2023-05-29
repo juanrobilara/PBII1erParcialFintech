@@ -27,8 +27,48 @@ public class Cuenta {
 		this.solicitudesDeAmistad = new HashSet<Cuenta>();
 		this.transacciones = new ArrayList<Transaccion>();
         this.saldos = new HashMap<>();
-
         
 	}
+
+
+
+
+	public Integer getIdCuenta() {
+		return idCuenta;
+	}
+
+
+
+
+	public void setIdCuenta(Integer idCuenta) {
+		this.idCuenta = idCuenta;
+	}
+
+
+
+
+	public Titular getTitular() {
+		return titular;
+	}
+
+
+
+
+	public void setTitular(Titular titular) {
+		this.titular = titular;
+	}
+
+
+
+	public Long getCvu() {
+		return cvu;
+	}
+
+
+	public void setCvu(Long cvu) {
+		this.cvu = cvu;
+	}
+	
+	
 	
 }
