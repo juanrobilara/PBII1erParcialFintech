@@ -46,5 +46,9 @@ public class Fintech {
 		}
 		return null;
 	}
+
+	public Integer cantidadDeCuentas() {
+		return cuentas.size();
+	}
 	
 }

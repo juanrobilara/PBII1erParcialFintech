@@ -39,15 +39,31 @@ public class FintechTest {
 		String nombre = "Mario";
 		String apellido = "Gomez";
 		Integer dni = 33333333;
-		
+			
 		Titular mario = new Titular(usuario, nombre, apellido, dni);
-		
+			
 		//CAMPOS CREACION CUENTA
 		Integer id = 1;
 		Long cvu = 12345678910L;
+			
+		//CAMPOS CREACION CUENTA 2;
+		Integer idDos = 1;
+		Long cvuDos = 10987654321L;
 		
+			
 		Cuenta cuentaDeMario = new Cuenta(id, cvu, mario);
-		Cuenta cuentaClon = cuentaDeMario;
+		Cuenta cuentaCopionaDeMario = new Cuenta(idDos, cvuDos, mario);
+			
+		//AGREGO CUENTAS
+		nuevaApp.agregarCuenta(cuentaDeMario);
+		nuevaApp.agregarCuenta(cuentaCopionaDeMario);
+			
+		//EJECUCIÓN
+		Integer valorEsperado = 1;
+		Integer valorObtenido = nuevaApp.cantidadDeCuentas();
+			
+		assertEquals(valorEsperado, valorObtenido);
+
 	}
 	
 	@Test
