@@ -28,7 +28,15 @@ public class Cuenta {
 		this.solicitudesDeAmistad = new HashSet<Cuenta>();
 		this.transacciones = new ArrayList<Transaccion>();
         this.saldos = new HashMap<>();
-        
+        agregarMoneda(new Peso());
+	}
+
+
+
+
+	private void agregarMoneda(Moneda moneda) {
+		saldos.put(moneda.getNombre(), moneda);
+		
 	}
 
 
@@ -72,6 +80,22 @@ public class Cuenta {
 
 
 
+    public Boolean transferir(Cuenta cuentaDestino, String tipoMoneda, double cantidad) {
+        Moneda monedaOrigen = saldos.get(tipoMoneda);
+        Moneda monedaDestino = cuentaDestino.saldos.get(tipoMoneda);
+
+        if (monedaOrigen != null && monedaDestino != null) {
+            if (monedaOrigen.getSaldo() >= cantidad) {
+                monedaOrigen.restarSaldo(cantidad);
+                monedaDestino.agregarSaldo(cantidad);
+                transacciones.add(new Transaccion(TipoTransaccion.TRANSFERENCIA, cantidad, tipoMoneda));
+                return true;
+            } 
+        }
+        return false;
+    }
+	
+	
 
 	@Override
 	public int hashCode() {
