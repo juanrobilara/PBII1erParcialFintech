@@ -144,7 +144,34 @@ public class FintechTest {
 	
 	@Test
 	public void queSePuedaRetirarPesos() {
+		//CAMPOS CREACION TITULAR
+		String usuario = "marito27";
+		String nombre = "Mario";
+		String apellido = "Gomez";
+		Integer dni = 33333333;
+		
+	
+		Titular mario = new Titular(usuario, nombre, apellido, dni);
 
+		
+		//CAMPOS CREACION CUENTA 
+		Integer id = 1;
+		Long cvu = 12345678910L;
+		Cuenta cuentaDeMario = new Cuenta(id, cvu, mario);
+		
+		
+		//AÑADO USUARIO A LA FINTECH
+		nuevaApp.agregarCuenta(cuentaDeMario);
+		
+		String peso = "Peso";
+	
+		nuevaApp.depositar(cuentaDeMario, 3500.0);
+		nuevaApp.extraer(cuentaDeMario, 2500.0);
+		
+		Double valorObtenido = cuentaDeMario.obtenerSaldo(peso);
+		Double valorEsperado = 1000.0;
+		//EJECUCION
+		assertEquals(valorEsperado, valorObtenido);
 	}
 	
 	
