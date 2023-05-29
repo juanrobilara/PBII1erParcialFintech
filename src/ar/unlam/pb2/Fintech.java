@@ -47,8 +47,31 @@ public class Fintech {
 		return null;
 	}
 
+	
+
 	public Integer cantidadDeCuentas() {
 		return cuentas.size();
 	}
+	
+	
+	public Boolean transferir(Cuenta origen, Cuenta destino, Double monto, String moneda) {
+		
+		
+		if(existeCuenta(origen.getIdCuenta()) && existeCuenta(destino.getIdCuenta())) {
+		
+			for(Cuenta cuentaOrigen : cuentas) {
+				if(cuentaOrigen.getIdCuenta() == origen.getIdCuenta()) {
+					for(Cuenta cuentaDestino : cuentas) {
+						if(cuentaDestino.getIdCuenta() == destino.getIdCuenta()) {
+							cuentaOrigen.transferir(cuentaDestino, moneda, monto);
+							return true;
+						}
+					}
+				}
+			}
+		
+		} return false;
+	}
+	
 	
 }
