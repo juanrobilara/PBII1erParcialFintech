@@ -144,6 +144,23 @@ public class Cuenta {
             return -1.0;
         }
 	}
+
+
+
+
+	public Boolean extraerPesos(Double monto) {
+        Moneda peso = saldos.get("Peso");
+
+        if (peso != null) {
+            if (peso.getSaldo() >= monto) {
+                peso.restarSaldo(monto);
+                transacciones.add(new Transaccion(TipoTransaccion.EXTRACCION, monto, peso.toString()));
+                return true;
+            } 
+        }
+        return false;
+		
+	}
 	
 	
 	

@@ -85,6 +85,18 @@ public class Fintech {
 		return false;
 		
 	}
+
+	public Boolean extraer(Cuenta cuenta, Double monto) {
+		if(existeCuenta(cuenta.getIdCuenta())) {
+			for(Cuenta c : cuentas) {
+				if(c.getIdCuenta() == cuenta.getIdCuenta()) {
+					c.extraerPesos(monto);
+					return true;
+				}
+			}
+		}
+		return false;	
+	}
 	
 	
 }
