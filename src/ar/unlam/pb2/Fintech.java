@@ -98,5 +98,18 @@ public class Fintech {
 		return false;	
 	}
 	
-	
+
+public Boolean comprarCripto(Cuenta cuenta, Double monto, String moneda) {
+
+		if(existeCuenta(cuenta.getIdCuenta())) {
+		for(Cuenta c : cuentas) {
+		if(c.getIdCuenta() == cuenta.getIdCuenta()) {
+		if((c.comprarCriptomonedas(moneda, monto))){
+		return true;
+		}
+		}
+		}
+		}
+		return false;
+		}
 }
