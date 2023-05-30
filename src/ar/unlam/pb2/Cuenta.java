@@ -31,6 +31,7 @@ public class Cuenta {
         agregarMoneda(new Peso());
         agregarMoneda(new Bitcoin());
         agregarMoneda(new Ethereum());
+        agregarMoneda(new Dai());
 	}
 
 

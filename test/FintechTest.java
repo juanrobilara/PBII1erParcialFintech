@@ -182,12 +182,74 @@ public class FintechTest {
 	
 	@Test
 	public void queSePuedaComprarDaiA_50_Pesos() {
+		//CAMPOS CREACION TITULAR
+				String usuario = "marito27";
+				String nombre = "Mario";
+				String apellido = "Gomez";
+				Integer dni = 33333333;
+				Titular mario = new Titular(usuario, nombre, apellido, dni);
 
+				//CAMPOS CREACION CUENTA
+				Integer id = 1;
+				Long cvu = 12345678910L;
+				Cuenta cuentaDeMario = new Cuenta(id, cvu, mario);
+
+				//PREPARACION
+				String dai = "DAI";
+				String peso = "Peso";
+
+				nuevaApp.agregarCuenta(cuentaDeMario);
+				nuevaApp.depositar(cuentaDeMario, 10000.0);
+				nuevaApp.comprarCripto(cuentaDeMario, 200.0, dai);
+
+				Double valorEsperado = 200.0;
+				Double valorObtenido = cuentaDeMario.obtenerSaldo(dai);
+				//EJECUCION
+				assertEquals(valorEsperado, valorObtenido);
+
+				//EJECUCION DOS (OPCIONAL): VERIFICO QUE MARIO TENGA 0 PESOS
+				assertEquals(0.0, cuentaDeMario.obtenerSaldo(peso), 0.01);
 	}
 	
 	@Test
 	public void queSePuedaTenerDivididoElSaldoEnPesosYEnCripto() {
-		
+		//CAMPOS CREACION TITULAR
+				String usuario = "marito27";
+				String nombre = "Mario";
+				String apellido = "Gomez";
+				Integer dni = 33333333;		
+				Titular mario = new Titular(usuario, nombre, apellido, dni);
+					
+				//CAMPOS CREACION CUENTA
+				Integer id = 1;
+				Long cvu = 12345678910L;		
+				Cuenta cuentaDeMario = new Cuenta(id, cvu, mario);
+					
+				//PREPARACION
+				String peso = "Peso";
+				String dai = "DAI";
+				//String ethereum = "Ethereum";
+				String bitcoin = "Bitcoin";
+					
+				nuevaApp.agregarCuenta(cuentaDeMario);		
+				nuevaApp.depositar(cuentaDeMario, 100000.0);		
+					
+				nuevaApp.comprarCripto(cuentaDeMario, 200.0, dai);
+				nuevaApp.comprarCripto(cuentaDeMario, 200.0, bitcoin);
+					
+				Double valorEsperadoBitcoin = 200.0;
+				Double valorObtenidoBitcoin = cuentaDeMario.obtenerSaldo(bitcoin);
+					
+				Double valorEsperadoDAI = 200.0;
+				Double valorObtenidoDAI = cuentaDeMario.obtenerSaldo(dai);
+					
+				Double valorEsperadoPeso = 50000.0;
+				Double valorObtenidoPeso = cuentaDeMario.obtenerSaldo(peso);
+				//EJECUCION: Verificar que se hayan podido comprar correctamente las dos criptos
+				//y asegurarse de que hayan quedado los pesos correspondientes
+				assertEquals(valorEsperadoBitcoin, valorObtenidoBitcoin);		
+				assertEquals(valorEsperadoDAI, valorObtenidoDAI);
+				assertEquals(valorEsperadoPeso, valorObtenidoPeso);
 
 		
 	}
