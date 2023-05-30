@@ -28,7 +28,7 @@ public class FintechTest {
 		
 		Cuenta cuentaDeMario = new Cuenta(id, cvu, mario);
 		
-		//EJECUCIÓN
+		//EJECUCIï¿½N
 		assertNotNull(cuentaDeMario);
 	}
 	
@@ -58,7 +58,7 @@ public class FintechTest {
 		nuevaApp.agregarCuenta(cuentaDeMario);
 		nuevaApp.agregarCuenta(cuentaCopionaDeMario);
 			
-		//EJECUCIÓN
+		//EJECUCIï¿½N
 		Integer valorEsperado = 1;
 		Integer valorObtenido = nuevaApp.cantidadDeCuentas();
 			
@@ -94,7 +94,7 @@ public class FintechTest {
 		Long cvuDos = 10987654321L;
 		Cuenta cuentaDePedro = new Cuenta(idDos, cvuDos, pedro);
 		
-		//AÑADO USUARIOS A LA FINTECH
+		//Aï¿½ADO USUARIOS A LA FINTECH
 		nuevaApp.agregarCuenta(cuentaDePedro);
 		nuevaApp.agregarCuenta(cuentaDeMario);
 		
@@ -121,7 +121,32 @@ public class FintechTest {
 	
 	@Test
 	public void queSePuedaComprarBitcoinsA_200_Pesos() {
+		//CAMPOS CREACION TITULAR
+				String usuario = "marito27";
+				String nombre = "Mario";
+				String apellido = "Gomez";
+				Integer dni = 33333333;
+				Titular mario = new Titular(usuario, nombre, apellido, dni);
 
+				//CAMPOS CREACION CUENTA
+				Integer id = 1;
+				Long cvu = 12345678910L;
+				Cuenta cuentaDeMario = new Cuenta(id, cvu, mario);
+
+				//PREPARACION
+				String bitcoin = "Bitcoin";
+				String peso = "Peso";
+				nuevaApp.agregarCuenta(cuentaDeMario);
+				nuevaApp.depositar(cuentaDeMario, 10000.0);
+				nuevaApp.comprarCripto(cuentaDeMario, 50.0, bitcoin);
+
+				Double valorEsperado = 50.0;
+				Double valorObtenido = cuentaDeMario.obtenerSaldo(bitcoin);
+				//EJECUCION
+				assertEquals(valorEsperado, valorObtenido);
+				//EJECUCION DOS (OPCIONAL): VERIFICO QUE MARIO TENGA 0 PESOS
+				assertEquals(0.0, cuentaDeMario.obtenerSaldo(peso), 0.01);
+				
 	}
 	
 	@Test
@@ -160,7 +185,7 @@ public class FintechTest {
 		Cuenta cuentaDeMario = new Cuenta(id, cvu, mario);
 		
 		
-		//AÑADO USUARIO A LA FINTECH
+		//Aï¿½ADO USUARIO A LA FINTECH
 		nuevaApp.agregarCuenta(cuentaDeMario);
 		
 		String peso = "Peso";

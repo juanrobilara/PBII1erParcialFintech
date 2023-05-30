@@ -29,6 +29,7 @@ public class Cuenta {
 		this.transacciones = new ArrayList<Transaccion>();
         this.saldos = new HashMap<>();
         agregarMoneda(new Peso());
+        agregarMoneda(new Bitcoin());
 	}
 
 
@@ -163,7 +164,21 @@ public class Cuenta {
 	}
 	
 	
-	
+	 public Boolean comprarCriptomonedas(String criptomoneda, double cantidad) {
+	        Moneda peso = saldos.get("Peso");
+	        Moneda monedaCriptomoneda = saldos.get(criptomoneda);
+
+	        if (peso != null && monedaCriptomoneda != null) {
+	            double costoCriptomoneda = cantidad * monedaCriptomoneda.getValor();
+	            if (peso.getSaldo() >= costoCriptomoneda) {
+	                peso.restarSaldo(costoCriptomoneda);
+	                monedaCriptomoneda.agregarSaldo(cantidad);
+	                transacciones.add(new Transaccion(TipoTransaccion.COMPRA, cantidad, criptomoneda));
+	                return true;
+	            } 
+	        }
+	        return false;
+	    }
 	
 	
 }
