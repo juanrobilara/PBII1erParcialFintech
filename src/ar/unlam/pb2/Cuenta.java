@@ -30,6 +30,7 @@ public class Cuenta {
         this.saldos = new HashMap<>();
         agregarMoneda(new Peso());
         agregarMoneda(new Bitcoin());
+        agregarMoneda(new Ethereum());
 	}
 
 

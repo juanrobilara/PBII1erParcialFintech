@@ -151,7 +151,33 @@ public class FintechTest {
 	
 	@Test
 	public void queSePuedaComprarEthereumA_100_Pesos() {
+		//CAMPOS CREACION TITULAR
+				String usuario = "marito27";
+				String nombre = "Mario";
+				String apellido = "Gomez";
+				Integer dni = 33333333;
+				Titular mario = new Titular(usuario, nombre, apellido, dni);
 
+				//CAMPOS CREACION CUENTA
+				Integer id = 1;
+				Long cvu = 12345678910L;
+				Cuenta cuentaDeMario = new Cuenta(id, cvu, mario);
+
+				//PREPARACION
+				String ethereum = "Ethereum";
+				String peso = "Peso";
+
+				nuevaApp.agregarCuenta(cuentaDeMario);
+				nuevaApp.depositar(cuentaDeMario, 10000.0);
+				nuevaApp.comprarCripto(cuentaDeMario, 100.0, ethereum);
+
+				Double valorEsperado = 100.0;
+				Double valorObtenido = cuentaDeMario.obtenerSaldo(ethereum);
+				//EJECUCION
+				assertEquals(valorEsperado, valorObtenido);
+
+				//EJECUCION DOS (OPCIONAL): VERIFICO QUE MARIO TENGA 0 PESOS
+				assertEquals(0.0, cuentaDeMario.obtenerSaldo(peso), 0.01);
 	}
 	
 	@Test
