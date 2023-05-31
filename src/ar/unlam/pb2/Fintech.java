@@ -13,8 +13,8 @@ public class Fintech {
 	}
 
 	public Boolean existeCuenta(Integer idCuenta) {
-		for(Cuenta c : cuentas) {
-			if(c.getIdCuenta() == idCuenta) {
+		for (Cuenta c : cuentas) {
+			if (c.getIdCuenta() == idCuenta) {
 				return true;
 			}
 		}
@@ -22,94 +22,107 @@ public class Fintech {
 	}
 
 	public Boolean agregarCuenta(Cuenta nuevo) {
-		if(cuentas.contains(nuevo)) {
+		if (cuentas.contains(nuevo)) {
 			return false;
 		} else {
 			cuentas.add(nuevo);
 			return true;
-		}		
+		}
 	}
-	
+
 	public void borrarCuenta(Cuenta eliminada) {
-		
+
 		cuentas.remove(eliminada);
-		
+
 	}
-	
+
 	public Cuenta buscarCuenta(Integer idCuenta) {
-		
-		
+
 		for (Cuenta c : cuentas) {
-			if(c.getIdCuenta().equals(idCuenta)) {
+			if (c.getIdCuenta().equals(idCuenta)) {
 				return c;
 			}
 		}
 		return null;
 	}
 
-	
-
 	public Integer cantidadDeCuentas() {
 		return cuentas.size();
 	}
-	
-	
+
 	public Boolean transferir(Cuenta origen, Cuenta destino, Double monto, String moneda) {
-		
-		
-		if(existeCuenta(origen.getIdCuenta()) && existeCuenta(destino.getIdCuenta())) {
-		
-			for(Cuenta cuentaOrigen : cuentas) {
-				if(cuentaOrigen.getIdCuenta() == origen.getIdCuenta()) {
-					for(Cuenta cuentaDestino : cuentas) {
-						if(cuentaDestino.getIdCuenta() == destino.getIdCuenta()) {
+
+		if (existeCuenta(origen.getIdCuenta()) && existeCuenta(destino.getIdCuenta())) {
+
+			for (Cuenta cuentaOrigen : cuentas) {
+				if (cuentaOrigen.getIdCuenta() == origen.getIdCuenta()) {
+					for (Cuenta cuentaDestino : cuentas) {
+						if (cuentaDestino.getIdCuenta() == destino.getIdCuenta()) {
 							cuentaOrigen.transferir(cuentaDestino, moneda, monto);
 							return true;
 						}
 					}
 				}
 			}
-		
-		} return false;
+
+		}
+		return false;
 	}
 
 	public Boolean depositar(Cuenta actual, Double monto) {
-		if(existeCuenta(actual.getIdCuenta())) {
-			for(Cuenta c : cuentas) {
-				if(c.getIdCuenta() == actual.getIdCuenta()) {
+		if (existeCuenta(actual.getIdCuenta())) {
+			for (Cuenta c : cuentas) {
+				if (c.getIdCuenta() == actual.getIdCuenta()) {
 					c.depositarPesos(monto);
 					return true;
 				}
 			}
 		}
 		return false;
-		
+
 	}
 
 	public Boolean extraer(Cuenta cuenta, Double monto) {
-		if(existeCuenta(cuenta.getIdCuenta())) {
-			for(Cuenta c : cuentas) {
-				if(c.getIdCuenta() == cuenta.getIdCuenta()) {
+		if (existeCuenta(cuenta.getIdCuenta())) {
+			for (Cuenta c : cuentas) {
+				if (c.getIdCuenta() == cuenta.getIdCuenta()) {
 					c.extraerPesos(monto);
 					return true;
 				}
 			}
 		}
-		return false;	
+		return false;
 	}
-	
 
-public Boolean comprarCripto(Cuenta cuenta, Double monto, String moneda) {
+	public Boolean comprarCripto(Cuenta cuenta, Double monto, String moneda) {
 
-		if(existeCuenta(cuenta.getIdCuenta())) {
-		for(Cuenta c : cuentas) {
-		if(c.getIdCuenta() == cuenta.getIdCuenta()) {
-		if((c.comprarCriptomonedas(moneda, monto))){
-		return true;
-		}
-		}
-		}
+		if (existeCuenta(cuenta.getIdCuenta())) {
+			for (Cuenta c : cuentas) {
+				if (c.getIdCuenta() == cuenta.getIdCuenta()) {
+					if ((c.comprarCriptomonedas(moneda, monto))) {
+						return true;
+					}
+				}
+			}
 		}
 		return false;
+	}
+
+	public Boolean enviarSolicitudDeAmistad(Cuenta actual, Cuenta amigo) {
+
+		if (existeCuenta(actual.getIdCuenta()) && existeCuenta(amigo.getIdCuenta())) {
+			for (Cuenta cuentaOrigen : cuentas) {
+				if (cuentaOrigen.getIdCuenta() == actual.getIdCuenta()) {
+					for (Cuenta cuentaDestino : cuentas) {
+						if (cuentaDestino.getIdCuenta() == amigo.getIdCuenta()) {
+							cuentaOrigen.enviarSolicitudDeAmistad(cuentaDestino);
+							return true;
+						}
+					}
+				}
+			}
+
 		}
+		return false;
+	}
 }
